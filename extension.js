@@ -151,8 +151,8 @@ class RecentItems extends PanelMenu.Button {
 
   _launchFile(uri, ev) {
     if (ev.get_button() == 3) {
-      let dir = Gio.Vfs.get_default().get_file_for_uri(uri).get_parent().get_uri();
-      Gio.app_info_launch_default_for_uri(dir, global.create_app_launch_context(0, -1));
+      const app = Gio.app_info_get_default_for_type('inode/directory', false);
+      app.launch_uris([uri], global.create_app_launch_context(0, -1));
     }
     else {
       Gio.app_info_launch_default_for_uri(uri, global.create_app_launch_context(0, -1));
